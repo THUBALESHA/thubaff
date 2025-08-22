@@ -1,0 +1,479 @@
+<!-- =============================
+MULTI-FILE WEBSITE PACKAGE FOR THUBALESHA
+Copy each section into its own file name as shown below.
+Logo file expected: thubaf.jpg
+============================= --><!-- =============================
+FILE: index.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thubalesha Cash Loan Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="scripts.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Thubalesha Logo" class="logo"/>
+    <h1>Thubalesha Cash Loans</h1>
+  </header>  <nav class="nav">
+    <a href="index.html" class="active">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>  <main class="container">
+    <section class="card">
+      <h2>Loan Calculator</h2>
+      <div class="grid">
+        <label>
+          <span>Loan Amount (R)</span>
+          <input type="number" id="amount" min="1" step="0.01" required>
+        </label>
+        <label>
+          <span>Months</span>
+          <select id="months"></select>
+        </label>
+        <label class="full">
+          <span>Monthly Interest Rate (%)</span>
+          <input type="number" id="interest" value="30" step="0.1" min="0">
+        </label>
+      </div>
+      <div class="actions">
+        <button id="calcBtn">Calculate</button>
+        <button id="printBtn" class="secondary">Print / Save PDF</button>
+        <button id="exportCsvBtn" class="secondary">Download CSV</button>
+      </div>
+      <div id="summary" class="summary"></div>
+    </section><section class="card">
+  <h3>Repayment Schedule</h3>
+  <div id="scheduleWrap" class="table-wrap">
+    <table id="schedule" class="table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Opening Balance</th>
+          <th>Interest</th>
+          <th>Principal</th>
+          <th>Initial Fee Portion</th>
+          <th>Insurance</th>
+          <th>Total Payment</th>
+          <th>Closing Balance</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card info">
+  <p><strong>Notes:</strong> Monthly repayment includes principal + interest at your monthly rate, plus R36 insurance, plus a 10% initial fee spread across the term. Net payout to client is the full loan amount (fee not deducted upfront).</p>
+</section>
+
+  </main>  <footer class="footer">
+    <div>
+      <strong>Contact:</strong> thubalesha0001@gmail.com · WhatsApp 0787102337 · Tel 016 020 0040
+    </div>
+    <div>© <span id="year"></span> Thubalesha. All rights reserved.</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: contract_form.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Application Contract — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="scripts.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>Application Contract</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html" class="active">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <h2>Borrower Details</h2>
+      <div class="grid">
+        <label><span>Full Name</span><input id="fullName" required></label>
+        <label><span>ID / Passport</span><input id="idNo" required></label>
+        <label><span>Phone</span><input id="phone" required></label>
+        <label><span>Email</span><input id="email" type="email"></label>
+        <label class="full"><span>Address</span><input id="address"></label>
+      </div>
+    </section><section class="card">
+  <h2>Loan Summary (from Calculator)</h2>
+  <div class="grid">
+    <label><span>Loan Amount (R)</span><input id="cLoan" readonly></label>
+    <label><span>Months</span><input id="cMonths" readonly></label>
+    <label><span>Monthly Interest (%)</span><input id="cRate" readonly></label>
+    <label><span>Initial Fee (R)</span><input id="cInitFee" readonly></label>
+    <label><span>Insurance / month (R)</span><input id="cIns" readonly></label>
+    <label><span>Monthly Repayment (R)</span><input id="cMonthly" readonly></label>
+    <label class="full"><span>Total Repayment (R)</span><input id="cTotal" readonly></label>
+  </div>
+  <button id="loadFromStorage">Load From Calculator</button>
+  <button id="printContract" class="secondary">Print / Save PDF</button>
+</section>
+
+<section class="card">
+  <h2>Declaration</h2>
+  <p>By signing this agreement, the borrower agrees to the loan terms, including the monthly interest rate, insurance fee, and initial fee payable over the term. The borrower acknowledges receiving the full loan amount.</p>
+  <div class="grid">
+    <label><span>Borrower Signature</span><input placeholder="Type full name as signature" id="signature"></label>
+    <label><span>Date</span><input type="date" id="signDate"></label>
+  </div>
+</section>
+
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: terms_form.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms & Conditions — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="scripts.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>Terms & Conditions</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html" class="active">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <h2>Loan Terms</h2>
+      <ul class="bullets">
+        <li>Monthly interest rate as agreed on application date.</li>
+        <li>Compulsory insurance fee of R36 per month during the term.</li>
+        <li>Initial fee of 10% of the loan amount, collected over the term.</li>
+        <li>Missed or late payments may incur additional charges as allowed by law.</li>
+        <li>Early settlement: interest recalculated; outstanding insurance & fee portions apply.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: comment_form.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comments — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="scripts.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>Comments</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html" class="active">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <h2>Leave a Comment</h2>
+      <div class="grid">
+        <label><span>Name</span><input id="cmName"></label>
+        <label><span>Comment</span><input id="cmText"></label>
+      </div>
+      <button id="addComment">Add Comment</button>
+      <ul id="commentsList" class="list"></ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: bank_form.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banking Info — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="scripts.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>Banking Information</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html" class="active">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <div class="grid">
+        <label><span>Account Name</span><input id="bankName"></label>
+        <label><span>Bank</span><input id="bank"></label>
+        <label><span>Account Number</span><input id="acctNo"></label>
+        <label><span>Branch Code</span><input id="branch"></label>
+        <label class="full"><span>Reference</span><input id="ref"></label>
+      </div>
+      <button id="saveBank">Save</button>
+    </section>
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: services.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>Our Services</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <ul class="bullets">
+        <li>Short-term cash loans</li>
+        <li>Flexible monthly interest options</li>
+        <li>Fast approvals and same-day payouts</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: about.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>About Thubalesha</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html" class="active">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <p>We provide straightforward cash loans with transparent pricing: a clear monthly interest rate, a fixed insurance amount, and a once-off initial fee spread across the term.</p>
+    </section>
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: faq.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAQ — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>Frequently Asked Questions</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html" class="active">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <details><summary>Do you deduct the initial fee upfront?</summary><p>No. The 10% initial fee is collected within the monthly repayments.</p></details>
+      <details><summary>Is insurance compulsory?</summary><p>Yes. Insurance is R36 per month for the term.</p></details>
+      <details><summary>Can I settle early?</summary><p>Yes. We recalculate the outstanding balance with interest to date and remaining fee/insurance portions.</p></details>
+    </section>
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: contact.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="scripts.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>Contact Us</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <p><strong>Email:</strong> thubalesha0001@gmail.com<br>
+         <strong>WhatsApp:</strong> 0787102337<br>
+         <strong>Tel:</strong> 016 020 0040</p>
+      <h2>Send us a message</h2>
+      <div class="grid">
+        <label><span>Name</span><input id="ctName"></label>
+        <label><span>Email</span><input id="ctEmail" type="email"></label>
+        <label class="full"><span>Message</span><textarea id="ctMsg"></textarea></label>
+      </div>
+      <button id="submitContact">Send</button>
+      <p id="contactStatus" class="muted"></p>
+    </section>
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: privacy.html
+============================= --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy — Thubalesha</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <img src="thubaf.jpg" alt="Logo" class="logo"/>
+    <h1>Privacy Policy</h1>
+  </header>
+  <nav class="nav">
+    <a href="index.html">Calculator</a>
+    <a href="contract_form.html">Application Contract</a>
+    <a href="terms_form.html">Terms & Conditions</a>
+    <a href="comment_form.html">Comments</a>
+    <a href="bank_form.html">Banking Info</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html" class="active">Privacy</a>
+  </nav>
+  <main class="container">
+    <section class="card">
+      <p>We collect and store loan application data for processing purposes only. Contact details are used to communicate about your loan. We do not sell personal information.</p>
+    </section>
+  </main>
+  <footer class="footer">
+    <div>© <span id="year"></span> Thubalesha</div>
+  </footer>
+</body>
+</html><!-- =============================
+FILE: styles.css
+============================= -->:root { --brand:#004080; --brand-2:#0066cc; --bg:#f7f9fc; } *{box-sizing:border-box} body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);margin:0;color:#0f172a} .logo{height:58px} .site-header{display:flex;align-items:center;gap:12px;padding:16px 20px} .nav{background:var(--brand);padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px} .nav a{color:#fff;text-decoration:none;padding:6px 12px;border-radius:8px;font-weight:700} .nav a.active,.nav a:hover{background:var(--brand-2)} .container{max-width:1000px;margin:22px auto;padding:0 16px} .card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:16px 18px;margin-bottom:16px} .info{background:#f8fafc} .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px} .grid .full{grid-column:1/-1} label span{display:block;font-weight:700;margin-bottom:6px} input,select,textarea{width:100%;padding:10px;border:1px solid #d0d7e2;border-radius:8px;font-size:14px} textarea{min-height:120px} .actions{display:flex;gap:10px;margin-top:12px} button{padding:10px 16px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer} button.secondary{background:#334155} button:hover{opacity:.95} .summary{margin-top:12px;background:#e6f0ff;border-radius:8px;padding:12px} .table-wrap{overflow:auto} .table{width:100%;border-collapse:collapse} .table th,.table td{border-bottom:1px solid #e2e8f0;padding:8px 6px;text-align:right} .table th:first-child,.table td:first-child{text-align:center} .footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:16px;background:#f1f5f9} .muted{color:#475569}
+
+@media print{ .nav,.actions,.footer{display:none} body{background:#fff} .card{box-shadow:none} }
+
+/* ============================= FILE: scripts.js ============================= */ // Populate months dropdowns where needed (index) (function init(){ const monthsSel = document.getElementById('months'); if(monthsSel){ for(let i=1;i<=36;i++){ const o=document.createElement('option'); o.value=i; o.textContent=i; monthsSel.appendChild(o);} } const y = document.getElementById('year'); if(y){ y.textContent = new Date().getFullYear(); }
+
+const calcBtn = document.getElementById('calcBtn'); if(calc
